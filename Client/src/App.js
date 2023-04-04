@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ErrorBoundary from './ErrorBoundary';
 
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -10,6 +11,7 @@ import AppContext from "./utils/context";
 
 function App() {
     return (
+        <ErrorBoundary>
         <BrowserRouter>
         <AppContext>
             <Header />
@@ -22,6 +24,7 @@ function App() {
             <Footer />
         </AppContext>
         </BrowserRouter>
+        </ErrorBoundary>
     );
 }
 export default App;
