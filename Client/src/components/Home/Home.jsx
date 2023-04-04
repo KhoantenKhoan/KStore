@@ -1,36 +1,36 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect} from "react";
 
 
 import "./Home.scss";
 
+import { fetchDataFromAPI } from "../../utils/api";
+import { context } from "../../utils/context";
 import Banner from "./Banner/Banner";
 import Category from "./Category/Category";
 import Products from "../Products/Products";
-import { fetchDataFromAPI } from "../../utils/api";
-import { context } from "../../utils/context";
+
 
 const Home = () => {
     const {categories, setCategories, products, setProducts} = useContext(context);
     useEffect(() => {
-        getCategories();
-        getProducts();
-    },[])
+        getProducts()
+        getCategories()
+    }, [])
 
     const getCategories = () =>{
         fetchDataFromAPI("/api/categories?populate=*")
         .then(res =>{
             console.log(res);
-            setCategories(res)
+            setCategories(res);
         });
     }
     const getProducts = () =>{
         fetchDataFromAPI("/api/products?populate=*")
         .then(res =>{
             console.log(res);
-            setProducts(res)
+            setProducts(res);
         });
     }
-
     return <div>
         <Banner/>
         <div className="main-content">
@@ -39,7 +39,6 @@ const Home = () => {
                 <Products products={products} headingText="Related Products" />
             </div>
         </div>
-
     </div>;
 };
 
